@@ -6,10 +6,11 @@ The design must be:
 - Contract-aware: leverage Acumatica’s REST API, OData, and Swagger/OpenAPI contracts.  
 - Extensible: new screens can be added with adapters and schemas.  
 - Production-ready: safe, typed, idempotent, with RBAC, observability, and Dockerized deployment.  
-- Developer-friendly: include OpenAPI files, unit tests, and policies to guide codegen.
+- Developer-friendly: include OpenAPI files, unit tests, and policies to guide codegen.  
+- MCP-compliant: use the official [Model Context Protocol Python SDK](https://github.com/modelcontextprotocol/python-sdk) for server and tool definitions.
 
 ---
-```text
+
 ## 1) Deliverables (repo structure)
 
 acumatica-mcp/
@@ -41,14 +42,19 @@ acumatica-mcp/
   README.md
   AGENTS.md
   SECURITY.md
-```
 
 ---
 
 ## 2) Runtime & dependencies
 
 - Python 3.11+
-- Libraries: mcp, pydantic>=2, requests, tenacity, uvicorn, pyyaml
+- Libraries:  
+  - mcp (Model Context Protocol Python SDK)  
+  - pydantic>=2  
+  - requests  
+  - tenacity  
+  - uvicorn  
+  - pyyaml
 - Testing: pytest, responses
 - Dev/lint: ruff, black
 
@@ -152,8 +158,12 @@ All tool arguments and results must be defined in Pydantic under schemas/{screen
 
 ## 7) Tools for Cases (MVP)
 
-Expose in server.py with @mcp.tool:
+Expose in server.py using the MCP SDK:
 
+- All tools must be defined with @mcp.tool decorator.
+- MCP server must be initialized with Server("acumatica-mcp").
+
+Tools:
 - create_case(subject, customer?, caseClass?, owner?, description?, hold?) → dict
 - assign_case(caseNbr, owner) → dict
 - hold_case(caseNbr, hold: bool) → dict
@@ -222,3 +232,10 @@ To add a new screen:
 - Implement retries/backoff for rate limits.
 - Honor Acumatica API limits and paging.
 
+---
+
+## 14) References
+
+- Acumatica ERP Integration Development Guide (REST API, OData, Swagger).
+- MCP Python SDK: https://github.com/modelcontextprotocol/python-sdk
+- Docker MCP Toolkit: https://docs.docker.com/desktop/mcp/
