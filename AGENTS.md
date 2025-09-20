@@ -7,6 +7,7 @@ This document instructs an AI developer tool to generate a working **MCP server*
 
 ## 1) Deliverables (repo structure)
 
+```text
 acumatica-mcp/
   server.py                     # MCP entrypoint + tool registry
   acumatica/
@@ -34,6 +35,7 @@ acumatica-mcp/
   README.md
   AGENTS.md
   SECURITY.md
+```
 
 ---
 
@@ -169,3 +171,4 @@ To add a new screen:
 - Provide SECURITY.md with disclosure instructions.
 - Ensure idempotency for create_* tools (include optional externalRef).
 - Add rate limit handling in client (retry with backoff).
+
