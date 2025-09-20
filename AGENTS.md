@@ -9,7 +9,7 @@ The design must be:
 - Developer-friendly: include OpenAPI files, unit tests, and policies to guide codegen.
 
 ---
-
+```text
 ## 1) Deliverables (repo structure)
 
 acumatica-mcp/
@@ -41,6 +41,7 @@ acumatica-mcp/
   README.md
   AGENTS.md
   SECURITY.md
+```
 
 ---
 
@@ -220,3 +221,4 @@ To add a new screen:
 - Ensure idempotency for create_* tools (include optional externalRef).
 - Implement retries/backoff for rate limits.
 - Honor Acumatica API limits and paging.
+
